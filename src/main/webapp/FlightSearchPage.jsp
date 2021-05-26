@@ -17,7 +17,7 @@
 
 		<!-- Search div -->
 		<div>
-			<form action="flightServlet" method="get">
+			<form action="SearchServlet" method="get">
 				<input type="text" name="from" value="Leaving From"> 
 				<input type="text" name="to" value="Going to"> 
 				<input type="date" name="departureDate"> 

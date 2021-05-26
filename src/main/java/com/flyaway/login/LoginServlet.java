@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.flyaway.authenticate.Authenticate;
-import com.flyaway.passager.Passager;
+
 
 
 @WebServlet("/LoginServlet")
@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Get username and password from request
+		//Get user name and password from request
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
