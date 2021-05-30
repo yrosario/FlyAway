@@ -14,21 +14,17 @@ public class Purchased {
 	@GeneratedValue
 	private int purchasedId;
 	
-	private int customerId;
-	private int flightId;
-	
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, 
 						  CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="passagerId")
 	private Passager passager;
 	
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, 
+			  CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name="flightId")
+    private Flight flight;
+	
 	public Purchased() {
-	}
-
-	public Purchased(int customerId, int flightId) {
-		super();
-		this.customerId = customerId;
-		this.flightId = flightId;
 	}
 
 	public int getPurchasedId() {
@@ -39,24 +35,6 @@ public class Purchased {
 		this.purchasedId = purchasedId;
 	}
 
-	public int getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-
-	public int getFlightId() {
-		return flightId;
-	}
-
-	public void setFlightId(int flightId) {
-		this.flightId = flightId;
-	}
-	
-	
-
 	public Passager getPassager() {
 		return passager;
 	}
@@ -64,12 +42,18 @@ public class Purchased {
 	public void setPassager(Passager passager) {
 		this.passager = passager;
 	}
+	
+	public Flight getFlight() {
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
+	}
 
 	@Override
 	public String toString() {
-		return "Purchased [purchasedId=" + purchasedId + ", customerId=" + customerId + ", flightId=" + flightId + "]";
+		return "Purchased [purchasedId=" + purchasedId +"]";
 	}
-	
-	
 	
 }

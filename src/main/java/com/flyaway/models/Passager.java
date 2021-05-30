@@ -94,7 +94,6 @@ public class Passager {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	
 
 	public String getPassword() {
 		return password;
@@ -116,7 +115,6 @@ public class Passager {
 		this.email = email;
 	}
 
-	
 
 	public List<Purchased> getPurchases() {
 		return purchases;

@@ -1,15 +1,19 @@
 package com.flyaway.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Flight {
 	@Id
 	@GeneratedValue
 	private int flightId;
-	private int customerId;
 	private int staffId;
 	private int airportDepatureId;
 	private int airportArrId;
@@ -17,6 +21,11 @@ public class Flight {
 	private int seatNo;
 	private String departureTime;
 	private String arrivalTime;
+	
+	@OneToMany(mappedBy="flight",
+		       cascade = {CascadeType.PERSIST, CascadeType.MERGE, 
+			              CascadeType.PERSIST, CascadeType.REFRESH})
+	private List<Purchased> purchases;
 	
 	
 	public Flight() {
@@ -30,7 +39,6 @@ public class Flight {
 		this.availableSeats = availableSeats;
 		this.departureTime = departureTime;
 		this.arrivalTime = arrivalTime;
-		customerId = 0;
 		staffId = 0;
 		seatNo = 0;
 	}
@@ -40,12 +48,6 @@ public class Flight {
 	}
 	public void setFlightId(int flightId) {
 		this.flightId = flightId;
-	}
-	public int getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
 	}
 	public int getStaffId() {
 		return staffId;
@@ -88,6 +90,28 @@ public class Flight {
 	}
 	public void setArrivalTime(String arrivalTime) {
 		this.arrivalTime = arrivalTime;
+	}
+
+	public List<Purchased> getPurchases() {
+		return purchases;
+	}
+
+	public void setPurchases(Purchased tempPurchases) {
+		
+		if(purchases == null)
+		{
+			purchases = new ArrayList<>();
+		}
+		
+		purchases.add(tempPurchases);
+		tempPurchases.setFlight(this);
+	}
+
+	@Override
+	public String toString() {
+		return "Flight [flightId=" + flightId + ", staffId=" + staffId + ", airportDepatureId=" + airportDepatureId
+				+ ", airportArrId=" + airportArrId + ", availableSeats=" + availableSeats + ", seatNo=" + seatNo
+				+ ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + "]";
 	}
 	
 	

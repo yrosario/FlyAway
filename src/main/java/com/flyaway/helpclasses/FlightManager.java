@@ -4,26 +4,20 @@ package com.flyaway.helpclasses;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 
 import com.flyaway.models.Flight;
+import com.flyaway.util.HibernateUtils;
 
 public class FlightManager {
 	
-	private Configuration config;
-	private StandardServiceRegistryBuilder builder;
 	private SessionFactory factory;
 	private Session session;
 	private Transaction transaction;
 	
 	public FlightManager() {
+		
+		factory = HibernateUtils.getSessionFactory();
 		try {
-			config = new Configuration().configure();
-			config.addAnnotatedClass(com.flyaway.models.Flight.class);
-			builder = new StandardServiceRegistryBuilder().applySettings(config.getProperties());
-			session = config.buildSessionFactory().openSession();
-			factory = config.buildSessionFactory(builder.build());
 			session = factory.openSession();
 			transaction = session.beginTransaction();
 		} catch (Exception e) {

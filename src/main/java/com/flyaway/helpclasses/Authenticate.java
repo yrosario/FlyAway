@@ -3,32 +3,24 @@ package com.flyaway.helpclasses;
 import org.hibernate.query.Query;
 
 import com.flyaway.models.Passager;
+import com.flyaway.util.HibernateUtils;
 
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 
 public class Authenticate {
-
-	private Configuration config;
-	private StandardServiceRegistryBuilder builder;
+	
 	private SessionFactory factory;
 	private Session session;
 	private Transaction transaction;
 
 	public Authenticate() {
 
+		factory= HibernateUtils.getSessionFactory();
 		try {
-			config = new Configuration().configure();
-			config.addAnnotatedClass(com.flyaway.models.Passager.class);
-			config.addAnnotatedClass(com.flyaway.models.Purchased.class);
-			builder = new StandardServiceRegistryBuilder().applySettings(config.getProperties());
-			session = config.buildSessionFactory().openSession();
-			factory = config.buildSessionFactory(builder.build());
 			session = factory.openSession();
 			transaction = session.beginTransaction();
 		} catch (Exception e) {
