@@ -1,15 +1,19 @@
 package com.flyaway.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Passager {
 	@Id
 	@GeneratedValue
 	private int passagerId;
-	private int flighId;
 	private String fname;
 	private String lname;
 	private String birthday;
@@ -18,15 +22,19 @@ public class Passager {
 	private String password;
 	private String email;
 	
+	@OneToMany(mappedBy="passager",
+		       cascade = {CascadeType.PERSIST, CascadeType.MERGE, 
+			              CascadeType.PERSIST, CascadeType.REFRESH})
+	private List<Purchased> purchases;
+	
 	public Passager() {
 		
 	}
 	
 	
-	public Passager(int flighId, String fname, String lname, String birthday, String address,
+	public Passager(String fname, String lname, String birthday, String address,
 			String phoneNumber, String password, String email) {
 		super();
-		this.flighId = flighId;
 		this.fname = fname;
 		this.lname = lname;
 		this.birthday = birthday;
@@ -44,14 +52,6 @@ public class Passager {
 
 	public void setPassagerId(int passagerId) {
 		this.passagerId = passagerId;
-	}
-
-	public int getFlighId() {
-		return flighId;
-	}
-
-	public void setFlighId(int flighId) {
-		this.flighId = flighId;
 	}
 
 	public String getFname() {
@@ -116,10 +116,31 @@ public class Passager {
 		this.email = email;
 	}
 
+	
+
+	public List<Purchased> getPurchases() {
+		return purchases;
+	}
+
+
+	public void setPurchases(List<Purchased> purchases) {
+		this.purchases = purchases;
+	}
+
+	public void add(Purchased tempCourse) {
+		
+		if(purchases == null) {
+			purchases = new ArrayList<>();
+		}
+		
+		purchases.add(tempCourse);
+		
+		tempCourse.setPassager(this);
+	}
 
 	@Override
 	public String toString() {
-		return "Passager [passagerId=" + passagerId + ", flighId=" + flighId + ", fname=" + fname + ", lname=" + lname
+		return "Passager [passagerId=" + passagerId + ", fname=" + fname + ", lname=" + lname
 				+ ", birthday=" + birthday + ", address=" + address + ", phoneNumber=" + phoneNumber + "]";
 	}
 

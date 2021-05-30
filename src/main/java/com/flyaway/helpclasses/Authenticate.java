@@ -25,6 +25,7 @@ public class Authenticate {
 		try {
 			config = new Configuration().configure();
 			config.addAnnotatedClass(com.flyaway.models.Passager.class);
+			config.addAnnotatedClass(com.flyaway.models.Purchased.class);
 			builder = new StandardServiceRegistryBuilder().applySettings(config.getProperties());
 			session = config.buildSessionFactory().openSession();
 			factory = config.buildSessionFactory(builder.build());
@@ -65,7 +66,7 @@ public class Authenticate {
 			String password, String email) {
 
 		try {
-			Passager passager = new Passager(0, fname, lname, birthday, address, phone, password, email);
+			Passager passager = new Passager(fname, lname, birthday, address, phone, password, email);
 			session.save(passager);
 			transaction.commit();
 			session.close();

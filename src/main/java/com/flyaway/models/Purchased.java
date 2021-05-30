@@ -1,8 +1,11 @@
 package com.flyaway.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Purchased {
@@ -10,8 +13,14 @@ public class Purchased {
 	@Id
 	@GeneratedValue
 	private int purchasedId;
+	
 	private int customerId;
 	private int flightId;
+	
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, 
+						  CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name="passagerId")
+	private Passager passager;
 	
 	public Purchased() {
 	}
@@ -44,6 +53,16 @@ public class Purchased {
 
 	public void setFlightId(int flightId) {
 		this.flightId = flightId;
+	}
+	
+	
+
+	public Passager getPassager() {
+		return passager;
+	}
+
+	public void setPassager(Passager passager) {
+		this.passager = passager;
 	}
 
 	@Override
