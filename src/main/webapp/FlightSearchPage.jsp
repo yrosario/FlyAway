@@ -13,6 +13,9 @@
 		<!-- Header div -->
 		<div>
 			<h1>Search for Flights</h1>
+			<%
+				out.println("Passenger ID: " + session.getAttribute("id"));
+			%>
 		</div>
 
 		<!-- Search div -->

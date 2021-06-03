@@ -16,6 +16,9 @@ public class Authenticate {
 	private SessionFactory factory;
 	private Session session;
 	private Transaction transaction;
+	
+	//Use to retrieve passenger information
+	private int passengerId;
 
 	public Authenticate() {
 
@@ -40,8 +43,10 @@ public class Authenticate {
 
 			transaction.commit();
 			if (passager != null) {
-				if (username.equalsIgnoreCase(passager.getEmail()) && password.equals(passager.getPassword()))
+				if (username.equalsIgnoreCase(passager.getEmail()) && password.equals(passager.getPassword())) {
+					passengerId = passager.getPassagerId();
 					return true;
+				}
 				else
 					return false;
 			}
@@ -67,6 +72,10 @@ public class Authenticate {
 			session.close();
 			return false;
 		}
+	}
+	
+	public int getId() {
+		return passengerId;
 	}
 
 }

@@ -121,11 +121,7 @@ public class Passager {
 	}
 
 
-	public void setPurchases(List<Purchased> purchases) {
-		this.purchases = purchases;
-	}
-
-	public void add(Purchased tempCourse) {
+	public void setPurchases(Purchased tempCourse) {
 		
 		if(purchases == null) {
 			purchases = new ArrayList<>();

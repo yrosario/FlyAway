@@ -9,10 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.flyaway.helpclasses.Authenticate;
-
-
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -25,12 +24,13 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		
-		
 		PrintWriter out = response.getWriter();
 		
 		Authenticate userInfo = new Authenticate();
 		if(userInfo.hasAccess(username, password)) {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("id", Integer.toString(userInfo.getId()));
+			response.sendRedirect("FlightSearchPage.jsp");
 			out.println("Success");
 		}else {
 			out.println("Incorrect username or password");

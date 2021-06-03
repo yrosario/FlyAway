@@ -45,7 +45,7 @@ public class SearchServlet extends HttpServlet {
 			out.print(" Seat NO: " + fl.getSeatNo());
 			out.print(" Staff ID: " + fl.getStaffId());
 			out.print("<form action='BuyFlightServlet' method='POST'>");
-			out.print("<input type='hidden' name='"+fl.getFlightId() +"'>");
+			out.print("<input type='hidden' name='flightId' value='"+fl.getFlightId() +"'>");
 			out.print("<input type='submit' value='buy!'>");
 			out.print("</form>");
 			out.println("<br>");

@@ -31,6 +31,19 @@
 
 
 		</div>
+		
+		<!-- Check if user has already logged in. If the user has logged in also check if the user -->
+		<!-- has select a flight to purchased -->
+		<%
+			Object passengerId = session.getAttribute("id");
+		    Object flightId = session.getAttribute("flightId");
+		    
+		    if(passengerId != null && flightId != null)
+		    	response.sendRedirect(request.getContextPath() + "/BuyFlightServlet.java");
+		    else if(passengerId != null)
+		    	response.sendRedirect("FlightSearchPage.jsp");
+		    
+		%>
 
 	</div>
 </body>
