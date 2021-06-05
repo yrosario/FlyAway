@@ -29,6 +29,7 @@
 				<input type="submit" value="Sign In">
 			</form>
 
+		Authenticate userInfo = new Authenticate();
 
 		</div>
 		

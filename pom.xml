@@ -38,7 +38,16 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.25</version>
 		</dependency>
+
+		<!-- Add JSTL Taglib -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 	</dependencies>
+
+
 
 	<!-- Disable web.xml warning -->
 	<build>

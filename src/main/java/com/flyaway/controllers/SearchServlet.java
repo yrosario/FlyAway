@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,9 +28,17 @@ public class SearchServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 	
+		//Gets list of dates from date spcified by user
 		List<Flight> flightList = new FlightQuery().getFlights(from, destination, departureDate, returningDate);
+		request.setAttribute("flightList", flightList);
 		
+		//Get a reuest dispatcher
+		RequestDispatcher dispatcher =
+				request.getRequestDispatcher("flightResults.jsp");
 		
+		//forwarding flight list to flightResults jsp page
+		dispatcher.forward(request, response);
+		/*
 		out.println("<html><head><title>Flight Search Page</title></head><body>");
 		out.println("<div> <div><h1>Flight Results</h1></div>");
 		out.println("<div>");
@@ -53,8 +62,7 @@ public class SearchServlet extends HttpServlet {
 	
 		}
 		
-		out.print("</div></div></body></html>");
-		
+		out.print("</div></div></body></html>");*/
 	}
 
 }

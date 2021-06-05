@@ -1,5 +1,6 @@
 package com.flyaway.helpclasses;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -39,7 +40,7 @@ public class FlightQuery {
 		try {
 			// Query the flight table
 			@SuppressWarnings("unchecked")
-			Query<Flight> query = (session.createQuery("FROM Flight"));
+			Query<Flight> query = (session.createQuery("FROM Flight WHERE date(departureTime)='"+departureDate+"'"));
 			List<Flight> flightList = query.list();
 
 			//commit 

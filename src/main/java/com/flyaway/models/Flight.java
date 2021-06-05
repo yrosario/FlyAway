@@ -1,6 +1,7 @@
 package com.flyaway.models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,8 +20,8 @@ public class Flight {
 	private int airportArrId;
 	private int availableSeats;
 	private int seatNo;
-	private String departureTime;
-	private String arrivalTime;
+	private Date departureTime;
+	private Date arrivalTime;
 	
 	@OneToMany(mappedBy="flight",
 		       cascade = {CascadeType.PERSIST, CascadeType.MERGE, 
@@ -31,8 +32,8 @@ public class Flight {
 	public Flight() {
 	}
 	
-	public Flight(int airportDepatureId, int airportArrId, int availableSeats, String departureTime,
-			String arrivalTime) {
+	public Flight(int airportDepatureId, int airportArrId, int availableSeats, Date departureTime,
+			Date arrivalTime) {
 
 		this.airportDepatureId = airportDepatureId;
 		this.airportArrId = airportArrId;
@@ -79,16 +80,16 @@ public class Flight {
 	public void setSeatNo(int seatNo) {
 		this.seatNo = seatNo;
 	}
-	public String getDepartureTime() {
+	public Date getDepartureTime() {
 		return departureTime;
 	}
-	public void setDepartureTime(String departureTime) {
+	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
 	}
-	public String getArrivalTime() {
+	public Date getArrivalTime() {
 		return arrivalTime;
 	}
-	public void setArrivalTime(String arrivalTime) {
+	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
