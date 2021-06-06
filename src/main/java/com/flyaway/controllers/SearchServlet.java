@@ -1,7 +1,6 @@
 package com.flyaway.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -25,12 +24,17 @@ public class SearchServlet extends HttpServlet {
 		String departureDate = request.getParameter("departureDate");
 		String returningDate = request.getParameter("returningDate");
 		
-		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 	
 		//Gets list of dates from date spcified by user
 		List<Flight> flightList = new FlightQuery().getFlights(from, destination, departureDate, returningDate);
 		request.setAttribute("flightList", flightList);
+		
+		//Pass infomation for the return flight
+		request.setAttribute("to", destination);
+		request.setAttribute("returningDate", returningDate);
+		request.setAttribute("departureDate", departureDate);
+		request.setAttribute("from", from);
 		
 		//Get a reuest dispatcher
 		RequestDispatcher dispatcher =

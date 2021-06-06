@@ -14,7 +14,14 @@
 		<div>
 			<h1>Search for Flights</h1>
 			<%
-				out.println("Passenger ID: " + session.getAttribute("id"));
+				if (session.getAttribute("id") != null)
+				      out.println("Passenger ID: " + session.getAttribute("id"));
+			
+				//Marker to track a flight has been selected to be purchased
+				if(session.getAttribute("firstFlight") != null && session.getAttribute("secondFlight") == null){
+						session.setAttribute("firstFlight", false);
+						session.setAttribute("secondFlight", false);
+				}
 			%>
 		</div>
 

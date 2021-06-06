@@ -31,9 +31,8 @@ public class BuyFlightServlet extends HttpServlet {
 		BuyFlightManager flightMngr = new BuyFlightManager();
 
 		//Get logged in user id if user has logged in. Otherwise stored the flightId in the session
-		//Object and redirect the user to log in.
+		//and redirect the user to log in.
 		if((String) session.getAttribute("id") != null) {
-			System.out.println("SESSION SHOULD BE NULL");
 			int id = Integer.parseInt((String) session.getAttribute("id"));
 			
 			PrintWriter out = response.getWriter();
@@ -44,6 +43,16 @@ public class BuyFlightServlet extends HttpServlet {
 		}else {
 			//Stored the flight information
 			session.setAttribute("flightId", flightId);
+		
+			//check if the first flight has been selected
+			if(session.getAttribute("firstFlight") == null) {
+				session.setAttribute("firstFlight", false);
+			}
+			//check if the 2nd flight	else if(session.getAttribute("secondFlight") == null){
+			else if(session.getAttribute("secondFlight") == null) {
+				session.setAttribute("secondFlight", flightId);
+			}
+			
 			response.sendRedirect("login.jsp");
 		}
 
